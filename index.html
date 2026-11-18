@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Think-First · Think Before You Prompt.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0A0A0C;--ice:#38BDF8;--t:#fff;--m:#94A3B8;--gl:rgba(255,255,255,.03);--bd:rgba(255,255,255,.08);
+--f:"Pretendard","Pretendard Variable","Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;--e:var(--f);--r:16px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--t);font:400 15px/1.7 var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px}
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);animation:fl 22s ease-in-out infinite alternate}
+.o1{width:460px;height:460px;background:var(--ice);top:-160px;right:-160px;opacity:.14}
+.o2{width:520px;height:520px;background:#fff;top:40vh;left:-260px;opacity:.05;animation-delay:-7s}
+.o3{width:420px;height:420px;background:#fff;bottom:-160px;right:-100px;opacity:.05;animation-delay:-12s}
+@keyframes fl{to{transform:translate(40px,-50px) scale(1.1)}}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px}
+.glass{background:var(--gl);border:1px solid var(--bd);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--r);padding:28px}
+nav{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:10;margin:10px auto 0;max-width:1200px;padding:0 20px}
+nav .glass{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 24px;background:rgba(10,10,12,.7)}
+.lg{font-weight:500;letter-spacing:-.03em;white-space:nowrap}.lg small{font-weight:400;color:var(--m);font-size:12px;letter-spacing:0}
+.links{display:none;gap:28px;color:var(--m);font-size:14px}.links a{color:inherit;text-decoration:none;transition:.2s}.links a:hover{color:var(--t)}
+.pill{min-height:44px;padding:0 20px;border-radius:12px;background:var(--ice);color:#0A0A0C;font-weight:500;font-size:14px;box-shadow:0 0 24px rgba(56,189,248,.35);display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
+h1,h2,h3{margin:0;letter-spacing:-.03em;font-weight:500}
+h1{font-size:clamp(44px,11vw,104px);line-height:1.02;font-weight:500;letter-spacing:-.04em}
+h2{font-size:clamp(26px,5vw,40px);line-height:1.28}
+h3{font-size:18px}
+.sub{color:var(--m)}.cy{color:var(--ice);text-shadow:0 0 28px rgba(56,189,248,.45)}
+.hero{padding:72px 0 56px;text-align:center;position:relative}
+.hero p{max-width:560px;margin:28px auto 0;font-size:15px}
+.badges{display:grid;gap:12px;margin-top:56px}
+.bdg{padding:28px;text-align:left}
+.bdg b{display:block;font-size:56px;line-height:1.05;font-weight:500;letter-spacing:-.04em;color:var(--t)}
+.bdg span{display:block;margin-top:8px;font-size:14px;color:var(--m)}
+section{padding:80px 0}
+.kick{font-size:13px;color:var(--m);margin-bottom:12px;font-weight:500}
+.bento{display:grid;gap:16px;margin-top:36px}
+.bento ul{list-style:none;margin:0;padding:0}
+.bento .glass li{margin-top:22px}
+.num{font-size:52px;font-weight:500;letter-spacing:-.04em;line-height:1.1;color:var(--ice);text-shadow:0 0 28px rgba(56,189,248,.3)}
+.q{font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1.55;margin:12px 0}
+.steps{display:grid;gap:16px;margin-top:36px}
+.step{transition:.25s}.step:hover{border-color:rgba(56,189,248,.55);box-shadow:0 0 32px rgba(56,189,248,.14)}
+.step .k{font-size:13px;color:var(--m)}.step h3{font-size:30px;font-weight:500;margin:10px 0 12px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px!important;margin:4px 0 12px;width:100%;max-width:460px;border-radius:12px!important}
+.tabs button{min-height:48px;border-radius:10px;color:var(--m);font-weight:500;font-size:14px;transition:.2s}
+.tabs button.on{background:var(--t);color:#0A0A0C}
+.item{width:100%;display:flex;gap:14px;align-items:center;text-align:left;min-height:56px;padding:10px 16px;margin-top:10px;border:1px solid var(--bd);border-radius:var(--r);background:var(--gl);transition:.2s}
+.item:hover{border-color:rgba(255,255,255,.25)}
+.item.on{border-color:var(--ice);background:rgba(56,189,248,.08)}
+.item .n{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-weight:500}
+.item.on .n{background:var(--ice);color:#0A0A0C;border-color:var(--ice)}
+.item small{display:block;color:var(--m);font-size:12px}
+textarea,input[type=text]{width:100%;margin-top:14px;padding:14px 16px;border-radius:var(--r);border:1px solid var(--bd);background:rgba(255,255,255,.03);resize:none}
+textarea::placeholder,input::placeholder{color:#64748B}
+.btn{min-height:48px;padding:0 24px;border-radius:12px;font-weight:500;margin:14px 8px 0 0;transition:.2s}
+.btn.p{background:var(--ice);color:#0A0A0C}.btn.s{border:1px solid var(--bd);background:var(--gl)}
+.btn:disabled{opacity:.3;cursor:not-allowed}.btn.p:not(:disabled):hover{box-shadow:0 0 24px rgba(56,189,248,.45)}
+.gauge{margin:20px 0 6px;padding:16px 20px;border-radius:var(--r);position:sticky;top:84px;z-index:4;background:rgba(10,10,12,.88);backdrop-filter:blur(16px);border:1px solid var(--bd);transition:.2s}
+.gauge.over{border-color:#fff;box-shadow:0 0 28px rgba(255,255,255,.3)}
+.gauge .top{display:flex;justify-content:space-between;font-weight:500}
+.gtrack{height:6px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:12px;overflow:hidden}
+.gfill{height:100%;width:0;background:var(--ice);border-radius:3px;transition:width .3s}
+.over .gfill{background:#fff}
+.warn{font-size:13px;color:var(--m);min-height:24px}.over+.warn{color:var(--t)}
+.cat{margin-top:20px}.cat h3{font-size:15px;margin-bottom:10px}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px}
+.opt{min-height:48px;border:1px solid var(--bd);border-radius:12px;background:var(--gl);font-size:13px;transition:.2s}
+.opt.on{background:rgba(56,189,248,.1);border-color:var(--ice)}
+.split{display:grid;gap:14px;margin-top:28px}
+.me{border:1.5px solid var(--ice);box-shadow:0 0 28px rgba(56,189,248,.14)}
+.split h3{font-size:14px;margin-bottom:12px;color:var(--ice)}.aic h3{color:var(--m)}
+.split ol,.split ul{margin:0;padding-left:20px}.rs{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-size:13px;color:var(--m)}
+.done{margin-top:22px;padding:18px 22px;border-radius:var(--r);border:1px solid var(--ice);box-shadow:0 0 24px rgba(56,189,248,.2);animation:pp .4s ease}
+@keyframes pp{from{opacity:0;transform:scale(.97)}}
+.hidden{display:none!important}
+.charts{display:grid;gap:16px;margin-top:36px}
+.ring{--p:0;width:140px;height:140px;border-radius:50%;background:conic-gradient(var(--c,var(--ice)) calc(var(--p)*1%),rgba(255,255,255,.07) 0);display:flex;align-items:center;justify-content:center;position:relative;margin:0 auto 10px}
+.ring::before{content:"";position:absolute;inset:10px;border-radius:50%;background:#0F0F12}
+.ring b{position:relative;font-size:32px;font-weight:500;letter-spacing:-.04em}
+.rings{display:flex;gap:28px;flex-wrap:wrap;margin-top:24px}.rings>div{text-align:center;font-size:13px;color:var(--m)}
+.br{margin-top:20px}.br div:first-child{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:8px}
+.br b{color:var(--ice);white-space:nowrap}
+.bt{height:8px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}.bf{height:100%;width:0;border-radius:4px;background:var(--ice);transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.bf.o{background:rgba(255,255,255,.7)}
+.voices{display:grid;gap:14px;margin-top:24px}
+.voice{display:flex;gap:16px;align-items:flex-start}.voice p{margin:0}.voice small{display:block;margin-top:12px;color:var(--m);font-size:12px}.av{flex:none;width:52px;height:52px;border-radius:50%;overflow:hidden;border:1px solid var(--bd);background:rgba(255,255,255,.05)}.av svg{width:100%;height:100%;display:block}
+.gb{margin-top:20px;display:grid;gap:14px}
+.gbn{padding:24px}.gbn small{display:block;margin-top:10px;color:var(--m);font-size:12px}
+.gbn.new{border-color:var(--ice);animation:pp .4s ease}
+footer{padding:40px 0 64px;text-align:center;color:var(--m);font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#fff;color:#0A0A0C;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:500;z-index:30;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(min-width:760px){
+ .links{display:flex}.badges{grid-template-columns:repeat(3,1fr)}
+ .bento{grid-template-columns:repeat(2,1fr)}.bento .wide{grid-column:1/-1}
+ .steps{grid-template-columns:repeat(3,1fr)}.split{grid-template-columns:1fr 1fr}
+ .charts{grid-template-columns:repeat(2,1fr)}.charts .wide{grid-column:1/-1}
+ .voices{grid-template-columns:repeat(2,1fr)}.gb{grid-template-columns:repeat(2,1fr)}
+ .glass{padding:32px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+b,strong{font-weight:500}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s}
+.rv.in{opacity:1;transform:none}
+.glass{will-change:translate}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="orbs" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<nav><div class="glass">
+<span class="lg">Think-First <small>by 뇌생각해조</small></span>
+<div class="links"><a href="#bg">Background</a><a href="#exp">Experience</a><a href="#arc">Archive</a></div>
+<a class="pill" href="#exp">체험 시작하기</a></div></nav>
+
+<div class="wrap">
+<header class="hero">
+<h1>Think Before<br>You <span class="cy">Prompt.</span></h1>
+<p class="sub">AI는 생각을 대신해 주는 도구가 아니라, 생각을 더 깊게 만들어 주는 도구입니다. AI에게 묻기 전 나만의 기준을 세우는 3초를 경험해 보세요.</p>
+<div class="badges">
+<div class="glass bdg"><b>+40명</b><span>부스 오프라인 참여자</span></div>
+<div class="glass bdg"><b>100%</b><span>사고력 습관 형성 의향</span></div>
+<div class="glass bdg"><b>100%</b><span>사고력 중요성 체감도</span></div>
+</div>
+</header>
+
+<section id="bg">
+<div class="kick">01 · Problem &amp; Vision</div>
+<h2>생각을 맡기는 일이<br>너무 쉬워졌습니다</h2>
+<div class="bento">
+<div class="glass"><h3>생성형 AI 활용 보편화와 생각의 외주화 심화</h3>
+<ul><li>국민 10명 중 9명이 생성형 AI를 써 본 경험이 있어요. 이제 AI는 일상 인프라입니다.</li>
+<li>AI로 과제를 한 뒤, 절반은 자신이 쓴 내용을 기억하지 못해요. 이를 인지적 오프로딩이라고 합니다.</li></ul></div>
+<div class="glass"><h3>사전 설문 분석 <small class="sub">(34명)</small></h3>
+<ul>
+<li><span class="num"><span class="cu" data-to="94.1" data-d="1">0</span>%</span><br>주 5회 이상 AI를 사용해요</li>
+<li><span class="num"><span class="cu" data-to="80.6" data-d="1">0</span>%</span><br>AI 사용 전 스스로 생각하는 시간이 줄었다고 답했어요</li>
+<li><span class="num"><span class="cu" data-to="48.4" data-d="1">0</span>%</span><br>AI 답변을 비판 없이 받아들여 판단력 저하를 체감해요</li></ul></div>
+<div class="glass wide"><div class="kick">5-Whys 핵심 인사이트</div>
+<p class="q">내 생각과 AI의 답변이 어떻게 다른지 비교해 볼 검증 경험이 없다.</p>
+<div class="kick" style="margin-top:20px">Vision</div>
+<p class="q" style="margin-bottom:0">AI를 쓰더라도 스스로 생각하고 판단하는 건강한 사용 문화 만들기.</p></div>
+</div>
+</section>
+
+<section id="proc">
+<div class="kick">02 · 3-Step Protocol</div>
+<h2>묻기 전 3초,<br>세 단계면 충분해요</h2>
+<div class="steps">
+<div class="glass step"><div class="k">STEP 01</div><h3>THINK</h3><p class="sub">AI에게 묻기 전, 질문에 대한 나만의 생각이나 기준을 한 문장으로 먼저 적어요.</p></div>
+<div class="glass step"><div class="k">STEP 02</div><h3>COMPARE</h3><p class="sub">AI가 내놓은 답과 내 기준을 비교하며 차이점과 빠진 맥락을 확인해요.</p></div>
+<div class="glass step"><div class="k">STEP 03</div><h3>SELECT</h3><p class="sub">AI의 답을 그대로 받아들이지 않고, 내 주관과 가치관에 맞춰 최종 선택해요.</p></div>
+</div></section>
+
+<section id="exp">
+<div class="kick">03 · Interactive Online Booth</div>
+<h2>내 생각을 먼저,<br>AI 제안은 그다음</h2>
+<div class="glass" style="margin-top:32px">
+<div class="glass tabs" style="padding:4px;border-radius:999px"><button class="on" data-t="A">할 일 우선순위</button><button data-t="B">알바비 50만 원</button></div>
+
+<div id="tA"><p class="sub">집에 돌아온 뒤 해야 할 네 가지예요. 먼저 하고 싶은 순서대로 눌러 1~4순위를 정하고, 이유를 적어 보세요.</p>
+<div id="aItems"></div>
+<textarea id="aWhy" rows="2" placeholder="그 순서로 정한 이유를 한 줄로 적어 주세요"></textarea>
+<button class="btn p" id="aCmp" disabled>AI 제안과 비교하기</button><button class="btn s" id="aReset">다시 정하기</button>
+<div id="aOut"></div></div>
+
+<div id="tB" class="hidden"><p class="sub">이번 달 알바비는 50만 원. 영역마다 금액을 골라 균형 있게 나눠 보세요.</p>
+<div class="gauge" id="gauge"><div class="top"><span>예산 게이지</span><span id="sum">0 / 50만 원</span></div><div class="gtrack"><div class="gfill" id="gf"></div></div></div>
+<div class="warn" id="warn"></div>
+<div id="bCats"></div>
+<button class="btn p" id="bCmp" disabled>AI 소비 분석과 비교하기</button><button class="btn s" id="bReset">다시 고르기</button>
+<div id="bOut"></div></div>
+</div></section>
+
+<section id="arc">
+<div class="kick">04 · Offline Booth Archive &amp; Real Data</div>
+<h2>부스에서 만난 40명의<br>실제 설문 결과</h2>
+<div class="charts">
+<div class="glass"><h3>습관 형성 의향 · 사고력 인지</h3>
+<div class="rings"><div><div class="ring" data-p="100"><b><span class="cu" data-to="100">0</span>%</b></div>습관 형성 의향<br>40 / 40명</div>
+<div><div class="ring" data-p="100" style="--c:#fff"><b><span class="cu" data-to="100">0</span>%</b></div>사고력 중요성 인지<br>40 / 40명</div></div></div>
+<div class="glass"><h3>자체 제작 AI 챗봇 만족도</h3><p class="sub" style="font-size:13px">긍정 평가 100%</p>
+<div class="br"><div><span>직접 체험이 신선했다</span><b>62.5% · 25명</b></div><div class="bt"><div class="bf" data-w="62.5"></div></div></div>
+<div class="br"><div><span>내 상태만 말해도 맞춤 추천해 줘서 편리했다</span><b>37.5% · 15명</b></div><div class="bt"><div class="bf o" data-w="37.5"></div></div></div></div>
+<div class="glass wide"><h3>가장 실천하기 쉬운 단계</h3>
+<div class="br"><div><span>3단계 모두 실천 가능</span><b>55% · 22명</b></div><div class="bt"><div class="bf" data-w="55"></div></div></div>
+<div class="br"><div><span>1단계 THINK · 내 기준 1문장 작성</span><b>27.5% · 11명</b></div><div class="bt"><div class="bf" data-w="27.5"></div></div></div>
+<div class="br"><div><span>2단계 COMPARE</span><b>10% · 4명</b></div><div class="bt"><div class="bf" data-w="10"></div></div></div>
+<div class="br"><div><span>3단계 SELECT</span><b>7.5% · 3명</b></div><div class="bt"><div class="bf" data-w="7.5"></div></div></div></div>
+</div>
+
+<h3 style="margin-top:56px;font-size:22px">Visitor Voices</h3>
+<div class="voices">
+<div class="glass voice"><div class="av" data-k="0" aria-hidden="true"></div><div><p>자신의 선택을 생각할 시간을 주고 이유를 설명하게 한 점이 좋았다. 머릿속으로만 생각했으면 AI를 바로 썼을 것 같다.</p><small>부스 참여자</small></div></div>
+<div class="glass voice"><div class="av" data-k="1" aria-hidden="true"></div><div><p>직접 만든 AI 챗봇과 내 생각을 비교하며 최종 결정을 할 수 있어서 좋은 경험이었다.</p><small>부스 참여자</small></div></div>
+<div class="glass voice"><div class="av" data-k="2" aria-hidden="true"></div><div><p>일상과 밀접한 활용 상황 중에 고를 수 있어서 지루하지 않고 재밌었다.</p><small>부스 참여자</small></div></div>
+<div class="glass voice"><div class="av" data-k="3" aria-hidden="true"></div><div><p>AI 잘 만들었네요! 내 상태만 말해도 딱 맞는 추천을 해줘서 신기하고 편리했다.</p><small>부스 참여자</small></div></div>
+</div>
+
+
+<h3 style="margin-top:56px;font-size:22px">나의 다짐 한 줄</h3>
+<p class="sub">앞으로 AI를 쓰기 전, 내가 지킬 나만의 기준을 남겨 주세요. 아래에 바로 추가돼요.</p>
+<div class="glass" style="margin-top:16px"><input type="text" id="gIn" maxlength="60" placeholder="예) 질문 전에 내 생각을 한 문장으로 먼저 적기" aria-label="AI 사용 전 다짐 한 줄">
+<button class="btn p" id="gBtn">다짐 남기기</button></div>
+<div class="gb" id="gb"></div>
+</section>
+<footer>Think-First · 팀 뇌생각해조 · 설문 40명 (오프라인 부스)</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2000)}
+$$(".tabs button").forEach(b=>b.onclick=()=>{$$(".tabs button").forEach(x=>x.classList.toggle("on",x===b));$("#tA").classList.toggle("hidden",b.dataset.t!=="A");$("#tB").classList.toggle("hidden",b.dataset.t!=="B")});
+function decide(box,m,a){
+ box.insertAdjacentHTML("beforeend",`<p style="margin-top:20px;font-weight:500">이제 최종 결정은 내가 해요.</p><button class="btn p" data-d="m">내 기준대로 실행하기</button><button class="btn s" data-d="a">AI 제안 참고해 수정하기</button><div class="done hidden"></div>`);
+ box.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const d=box.querySelector(".done");d.classList.remove("hidden");d.innerHTML=`<b class="cy">✓ Think-First 완료!</b><br><span class="sub">${b.dataset.d==="m"?m:a}</span>`});
+}
+const A=[["분리수거하기","15분 · 일주일 모임"],["과제 마무리하기","40분 · 내일 마감"],["시험 공부하기","60분 · 다음 주 예정"],["설거지하기","20분 · 오늘 쌓임"]],aiO=[1,3,2,0];let pk=[];
+function dA(){$("#aItems").innerHTML=A.map((x,i)=>{const r=pk.indexOf(i)+1;return `<button class="item ${r?"on":""}" data-i="${i}"><span class="n">${r||""}</span><span><b>${x[0]}</b><small>${x[1]}</small></span></button>`}).join("");
+ $$("#aItems .item").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,k=pk.indexOf(i);k>-1?pk.splice(k,1):pk.push(i);dA()});$("#aCmp").disabled=pk.length<4}
+$("#aReset").onclick=()=>{pk=[];$("#aWhy").value="";$("#aOut").innerHTML="";dA()};
+$("#aCmp").onclick=()=>{const li=o=>o.map(i=>`<li>${A[i][0]}</li>`).join(""),w=esc($("#aWhy").value.trim())||"이유를 적지 않았어요";
+ $("#aOut").innerHTML=`<div class="split"><div class="glass me"><h3>나의 기준</h3><ol>${li(pk)}</ol><p class="rs">“${w}”</p></div><div class="glass aic"><h3>AI 추천 · 마감·효율 기준</h3><ol>${li(aiO)}</ol><p class="rs">마감이 임박한 과제를 먼저, 짧고 오늘 해야 하는 설거지를 그다음에 두는 순서예요.</p></div></div><p class="sub" style="margin-top:14px">AI의 답이 무조건 정답은 아닙니다. 나만의 기준을 세운 것 자체가 좋은 시작이에요.</p>`;
+ decide($("#aOut"),"내 우선순위 그대로 실행해요.","AI 제안을 참고해 내 순서를 다듬었어요.");$("#aOut").scrollIntoView({behavior:"smooth",block:"nearest"})};
+dA();
+const C=["교통비","식비","여가/취미","쇼핑","저축"],V=[0,5,10,20],AI=[5,20,10,5,10];let sel=C.map(()=>null);
+function dB(){$("#bCats").innerHTML=C.map((c,i)=>`<div class="cat"><h3>${c}</h3><div class="opts">${V.map(v=>`<button class="opt ${sel[i]===v?"on":""}" data-c="${i}" data-v="${v}">${v?v+"만 원":"0원"}</button>`).join("")}</div></div>`).join("");
+ $$("#bCats .opt").forEach(b=>b.onclick=()=>{sel[+b.dataset.c]=+b.dataset.v;dB()});
+ const s=sel.reduce((a,v)=>a+(v||0),0),over=s>50,all=sel.every(v=>v!==null);
+ $("#sum").textContent=`${s} / 50만 원`;$("#gauge").classList.toggle("over",over);$("#gf").style.width=Math.min(s/50*100,100)+"%";
+ $("#warn").textContent=over?`예산을 ${s-50}만 원 초과했어요. 한 영역을 줄여 보세요.`:all?(s<50?`${50-s}만 원이 남았어요.`:"50만 원을 딱 맞췄어요."):"";$("#bCmp").disabled=!(all&&!over)}
+$("#bReset").onclick=()=>{sel=C.map(()=>null);$("#bOut").innerHTML="";dB()};
+$("#bCmp").onclick=()=>{const m=Math.max(...sel),top=C[sel.indexOf(m)],tone=sel[4]>=15?"미래를 먼저 챙기는 저축형":top==="식비"?"일상의 만족을 챙기는 든든형":top==="여가/취미"?"경험에 투자하는 취향형":top==="쇼핑"?"갖고 싶은 것을 놓치지 않는 실속형":"이동을 우선하는 활동형";
+ const row=a=>C.map((c,i)=>`<li>${c} ${a[i]?a[i]+"만 원":"0원"}</li>`).join("");
+ $("#bOut").innerHTML=`<div class="split"><div class="glass me"><h3>나의 소비 성향</h3><p style="font-weight:500;margin:0 0 8px">${tone}</p><ul>${row(sel)}</ul></div><div class="glass aic"><h3>AI 균형 추천안</h3><ul>${row(AI)}</ul><p class="rs">고정 지출을 먼저 확보하고 저축과 여가를 같은 비중으로 두는 안이에요.</p></div></div>`;
+ decide($("#bOut"),"내 소비 기준 그대로 실행해요.","AI 균형안을 참고해 예산을 조정했어요.");$("#bOut").scrollIntoView({behavior:"smooth",block:"nearest"})};
+dB();
+/* guestbook: first five are real pledges from the booth survey */
+const G=[["내 생각 문장 먼저 써 보고 AI 활용하기","부스 참여자"],["나만의 확고한 기준을 하나 세우고 시작하겠다.","부스 참여자"],["어느 정도 생각한 내용을 대략적으로 노트에 적어 보기","부스 참여자"],["내 의견을 제시한 뒤 비교해 보기","부스 참여자"],["물어보기 전에 잠시나마 나만의 온전한 생각을 할 수 있는 시간을 가져 보려고 한다.","부스 참여자"]];
+function dG(n){$("#gb").innerHTML=G.map((g,i)=>`<div class="glass gbn ${n&&!i?"new":""}"><p style="margin:0">“${esc(g[0])}”</p><small>${g[1]}</small></div>`).join("")}
+$("#gBtn").onclick=()=>{const i=$("#gIn"),v=i.value.trim();if(!v){toast("다짐 한 줄을 먼저 적어 주세요");i.focus();return}G.unshift([v,"방금 · 온라인 방문자"]);i.value="";dG(true);toast("다짐이 아카이브에 추가됐어요")};
+$("#gIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("#gBtn").click()});dG();
+/* reveal: count-up + bars, once */
+function run(el){
+ el.querySelectorAll?.(".cu").forEach(e=>{const to=+e.dataset.to,d=+e.dataset.d||0,t0=performance.now();(function s(t){const p=Math.min((t-t0)/1300,1);e.textContent=(to*(1-Math.pow(1-p,3))).toFixed(d);if(p<1)requestAnimationFrame(s)})(t0)});
+ el.querySelectorAll?.(".bf").forEach(e=>setTimeout(()=>e.style.width=e.dataset.w+"%",80));
+ el.querySelectorAll?.(".ring").forEach(e=>{const to=+e.dataset.p,t0=performance.now();(function s(t){const p=Math.min((t-t0)/1300,1);e.style.setProperty("--p",to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(t0)});
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run(e.target);io.unobserve(e.target)}}),{threshold:.25});
+$$(".glass").forEach(g=>{if(g.querySelector(".cu,.bf,.ring"))io.observe(g)});
+
+/* avatars: original monochrome memoji-style illustrations (swap for your own images) */
+function av(k){const sk=["#E2E8F0","#CBD5E1","#B4C0CF","#D5DDE8"][k],hr="#1E293B",face=`<circle cx="50" cy="55" r="26" fill="${sk}"/>`,eyes=`<circle cx="41" cy="55" r="2.8" fill="#0A0A0C"/><circle cx="59" cy="55" r="2.8" fill="#0A0A0C"/><path d="M42 65Q50 72 58 65" stroke="#0A0A0C" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+ const cap=`<path d="M24 52Q24 22 50 22Q76 22 76 52Q66 39 50 39Q34 39 24 52Z" fill="${hr}"/>`;
+ const parts=[face+cap+eyes+`<g stroke="#0A0A0C" stroke-width="2" fill="none"><circle cx="41" cy="55" r="7.5"/><circle cx="59" cy="55" r="7.5"/><path d="M48.5 55h3"/></g>`,
+ `<path d="M18 86Q10 22 50 20Q90 22 82 86Z" fill="${hr}"/>`+face+`<path d="M26 50Q50 24 74 50Q60 38 50 42Q38 38 26 50Z" fill="${hr}"/>`+eyes,
+ `<g fill="${hr}"><circle cx="34" cy="31" r="11"/><circle cx="50" cy="26" r="12"/><circle cx="66" cy="31" r="11"/><circle cx="26" cy="44" r="8"/><circle cx="74" cy="44" r="8"/></g>`+face+eyes+`<circle cx="75" cy="62" r="3" fill="#38BDF8"/>`,
+ `<circle cx="50" cy="17" r="9" fill="${hr}"/>`+face+cap+eyes];
+ return `<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(255,255,255,.04)"/><path d="M12 100Q14 82 50 82Q86 82 88 100Z" fill="#334155"/>${parts[k]}</svg>`}
+$$(".av").forEach(e=>e.innerHTML=av(+e.dataset.k));
+/* scroll reveal (fade-up) */
+const rmo=matchMedia("(prefers-reduced-motion:reduce)").matches;
+if(!rmo){
+ const rv=$$("section>.kick,section>h2,section>h3,section>p,.hero h1,.hero>p,.glass:not(nav .glass),footer");
+ rv.forEach(e=>{e.classList.add("rv");const sib=[...e.parentNode.children].indexOf(e);e.style.transitionDelay=(sib%3)*90+"ms"});
+ const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rio.unobserve(e.target);setTimeout(()=>e.target.style.transitionDelay="0ms",1200)}}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+ rv.forEach(e=>rio.observe(e));
+/* parallax: glow orbs drift slowly, cards ease at slightly different speeds */
+ const orbs=$$(".orb"),R=[520,820,1120],pc=$$(".steps .glass,.bento .glass,.voices .glass,.charts .glass");
+ pc.forEach((e,i)=>e.dataset.k=[.04,.09,.14][i%3]);
+ let tk=false;
+ function par(){tk=false;const y=scrollY,vh=innerHeight,t=y/Math.max(1,document.documentElement.scrollHeight-vh),lim=innerWidth<760?6:18;
+  orbs.forEach((o,i)=>o.style.translate=`0 ${-t*R[i]}px`);
+  pc.forEach(e=>{const r=e.getBoundingClientRect(),ty=e._t||0;if(r.bottom<-120||r.top>vh+120)return;const d=Math.max(-lim,Math.min(lim,(r.top+r.height/2-ty-vh/2)*e.dataset.k));e._t=d;e.style.translate=`0 ${d}px`})}
+ const q=()=>{if(!tk){tk=true;requestAnimationFrame(par)}};
+ addEventListener("scroll",q,{passive:true});addEventListener("resize",q);par();
+}
+</script>
+</body>
+</html>
