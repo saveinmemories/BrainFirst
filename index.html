@@ -27,12 +27,12 @@ nav{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:10;mar
 nav .glass{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 24px;background:rgba(10,10,12,.7)}
 .lg{font-weight:500;letter-spacing:-.03em;white-space:nowrap}.lg small{font-weight:400;color:var(--m);font-size:12px;letter-spacing:0}
 .links{display:none;gap:28px;color:var(--m);font-size:14px}.links a{color:inherit;text-decoration:none;transition:.2s}.links a:hover{color:var(--t)}
-.pill{min-height:44px;padding:0 20px;border-radius:12px;background:var(--ice);color:#0A0A0C;font-weight:500;font-size:14px;box-shadow:0 0 24px rgba(56,189,248,.35);display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
+.pill{min-height:44px;padding:0 20px;border-radius:12px;background:var(--ice);color:#0A0A0C;font-weight:500;font-size:14px;box-shadow:0 0 24px rgba(255,73,119,.35);display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
 h1,h2,h3{margin:0;letter-spacing:-.03em;font-weight:500}
 h1{font-size:clamp(44px,11vw,104px);line-height:1.02;font-weight:500;letter-spacing:-.04em}
 h2{font-size:clamp(26px,5vw,40px);line-height:1.28}
 h3{font-size:18px}
-.sub{color:var(--m)}.cy{color:var(--ice);text-shadow:0 0 28px rgba(56,189,248,.45)}
+.sub{color:var(--m)}.cy{color:var(--ice);text-shadow:0 0 28px rgba(255,73,119,.45)}
 .hero{padding:72px 0 56px;text-align:center;position:relative}
 .hero p{max-width:560px;margin:28px auto 0;font-size:15px}
 .badges{display:grid;gap:12px;margin-top:56px}
@@ -44,17 +44,17 @@ section{padding:80px 0}
 .bento{display:grid;gap:16px;margin-top:36px}
 .bento ul{list-style:none;margin:0;padding:0}
 .bento .glass li{margin-top:22px}
-.num{font-size:52px;font-weight:500;letter-spacing:-.04em;line-height:1.1;color:var(--ice);text-shadow:0 0 28px rgba(56,189,248,.3)}
+.num{font-size:52px;font-weight:500;letter-spacing:-.04em;line-height:1.1;color:var(--ice);text-shadow:0 0 28px rgba(255,73,119,.3)}
 .q{font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1.55;margin:12px 0}
 .steps{display:grid;gap:16px;margin-top:36px}
-.step{transition:.25s}.step:hover{border-color:rgba(56,189,248,.55);box-shadow:0 0 32px rgba(56,189,248,.14)}
+.step{transition:.25s}.step:hover{border-color:rgba(255,73,119,.55);box-shadow:0 0 32px rgba(255,73,119,.14)}
 .step .k{font-size:13px;color:var(--m)}.step h3{font-size:30px;font-weight:500;margin:10px 0 12px}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px!important;margin:4px 0 12px;width:100%;max-width:460px;border-radius:12px!important}
 .tabs button{min-height:48px;border-radius:10px;color:var(--m);font-weight:500;font-size:14px;transition:.2s}
 .tabs button.on{background:var(--t);color:#0A0A0C}
 .item{width:100%;display:flex;gap:14px;align-items:center;text-align:left;min-height:56px;padding:10px 16px;margin-top:10px;border:1px solid var(--bd);border-radius:var(--r);background:var(--gl);transition:.2s}
 .item:hover{border-color:rgba(255,255,255,.25)}
-.item.on{border-color:var(--ice);background:rgba(56,189,248,.08)}
+.item.on{border-color:var(--ice);background:rgba(255,73,119,.08)}
 .item .n{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-weight:500}
 .item.on .n{background:var(--ice);color:#0A0A0C;border-color:var(--ice)}
 .item small{display:block;color:var(--m);font-size:12px}
@@ -62,7 +62,7 @@ textarea,input[type=text]{width:100%;margin-top:14px;padding:14px 16px;border-ra
 textarea::placeholder,input::placeholder{color:#64748B}
 .btn{min-height:48px;padding:0 24px;border-radius:12px;font-weight:500;margin:14px 8px 0 0;transition:.2s}
 .btn.p{background:var(--ice);color:#0A0A0C}.btn.s{border:1px solid var(--bd);background:var(--gl)}
-.btn:disabled{opacity:.3;cursor:not-allowed}.btn.p:not(:disabled):hover{box-shadow:0 0 24px rgba(56,189,248,.45)}
+.btn:disabled{opacity:.3;cursor:not-allowed}.btn.p:not(:disabled):hover{box-shadow:0 0 24px rgba(255,73,119,.45)}
 .gauge{margin:20px 0 6px;padding:16px 20px;border-radius:var(--r);position:sticky;top:84px;z-index:4;background:rgba(10,10,12,.88);backdrop-filter:blur(16px);border:1px solid var(--bd);transition:.2s}
 .gauge.over{border-color:#fff;box-shadow:0 0 28px rgba(255,255,255,.3)}
 .gauge .top{display:flex;justify-content:space-between;font-weight:500}
@@ -73,12 +73,12 @@ textarea::placeholder,input::placeholder{color:#64748B}
 .cat{margin-top:20px}.cat h3{font-size:15px;margin-bottom:10px}
 .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px}
 .opt{min-height:48px;border:1px solid var(--bd);border-radius:12px;background:var(--gl);font-size:13px;transition:.2s}
-.opt.on{background:rgba(56,189,248,.1);border-color:var(--ice)}
+.opt.on{background:rgba(255,73,119,.1);border-color:var(--ice)}
 .split{display:grid;gap:14px;margin-top:28px}
-.me{border:1.5px solid var(--ice);box-shadow:0 0 28px rgba(56,189,248,.14)}
+.me{border:1.5px solid var(--ice);box-shadow:0 0 28px rgba(255,73,119,.14)}
 .split h3{font-size:14px;margin-bottom:12px;color:var(--ice)}.aic h3{color:var(--m)}
 .split ol,.split ul{margin:0;padding-left:20px}.rs{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-size:13px;color:var(--m)}
-.done{margin-top:22px;padding:18px 22px;border-radius:var(--r);border:1px solid var(--ice);box-shadow:0 0 24px rgba(56,189,248,.2);animation:pp .4s ease}
+.done{margin-top:22px;padding:18px 22px;border-radius:var(--r);border:1px solid var(--ice);box-shadow:0 0 24px rgba(255,73,119,.2);animation:pp .4s ease}
 @keyframes pp{from{opacity:0;transform:scale(.97)}}
 .hidden{display:none!important}
 .charts{display:grid;gap:16px;margin-top:36px}
@@ -277,7 +277,7 @@ function av(k){const sk=["#E2E8F0","#CBD5E1","#B4C0CF","#D5DDE8"][k],hr="#1E293B
  const cap=`<path d="M24 52Q24 22 50 22Q76 22 76 52Q66 39 50 39Q34 39 24 52Z" fill="${hr}"/>`;
  const parts=[face+cap+eyes+`<g stroke="#0A0A0C" stroke-width="2" fill="none"><circle cx="41" cy="55" r="7.5"/><circle cx="59" cy="55" r="7.5"/><path d="M48.5 55h3"/></g>`,
  `<path d="M18 86Q10 22 50 20Q90 22 82 86Z" fill="${hr}"/>`+face+`<path d="M26 50Q50 24 74 50Q60 38 50 42Q38 38 26 50Z" fill="${hr}"/>`+eyes,
- `<g fill="${hr}"><circle cx="34" cy="31" r="11"/><circle cx="50" cy="26" r="12"/><circle cx="66" cy="31" r="11"/><circle cx="26" cy="44" r="8"/><circle cx="74" cy="44" r="8"/></g>`+face+eyes+`<circle cx="75" cy="62" r="3" fill="#38BDF8"/>`,
+ `<g fill="${hr}"><circle cx="34" cy="31" r="11"/><circle cx="50" cy="26" r="12"/><circle cx="66" cy="31" r="11"/><circle cx="26" cy="44" r="8"/><circle cx="74" cy="44" r="8"/></g>`+face+eyes+`<circle cx="75" cy="62" r="3" fill="#FF4977"/>`,
  `<circle cx="50" cy="17" r="9" fill="${hr}"/>`+face+cap+eyes];
  return `<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(255,255,255,.04)"/><path d="M12 100Q14 82 50 82Q86 82 88 100Z" fill="#334155"/>${parts[k]}</svg>`}
 $$(".av").forEach(e=>e.innerHTML=av(+e.dataset.k));
