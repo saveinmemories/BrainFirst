@@ -289,15 +289,48 @@ if(!rmo){
  const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rio.unobserve(e.target);setTimeout(()=>e.target.style.transitionDelay="0ms",1200)}}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
  rv.forEach(e=>rio.observe(e));
 /* parallax: glow orbs drift slowly, cards ease at slightly different speeds */
- const orbs=$$(".orb"),R=[520,820,1120],pc=$$(".steps .glass,.bento .glass,.voices .glass,.charts .glass");
- pc.forEach((e,i)=>e.dataset.k=[.04,.09,.14][i%3]);
- let tk=false;
- function par(){tk=false;const y=scrollY,vh=innerHeight,t=y/Math.max(1,document.documentElement.scrollHeight-vh),lim=innerWidth<760?6:18;
-  orbs.forEach((o,i)=>o.style.translate=`0 ${-t*R[i]}px`);
-  pc.forEach(e=>{const r=e.getBoundingClientRect(),ty=e._t||0;if(r.bottom<-120||r.top>vh+120)return;const d=Math.max(-lim,Math.min(lim,(r.top+r.height/2-ty-vh/2)*e.dataset.k));e._t=d;e.style.translate=`0 ${d}px`})}
- const q=()=>{if(!tk){tk=true;requestAnimationFrame(par)}};
- addEventListener("scroll",q,{passive:true});addEventListener("resize",q);par();
+/* parallax: 배경 오브는 유지하고 카드 그룹은 함께 부드럽게 이동 */
+const orbs=$$(".orb"),
+R=[520,820,1120],
+groups=$$(".steps,.bento,.voices,.charts");
+
+let tk=false;
+
+function par(){
+  tk=false;
+  const y=scrollY,
+        vh=innerHeight,
+        t=y/Math.max(1,document.documentElement.scrollHeight-vh);
+
+  // 배경 오브 움직임 유지
+  orbs.forEach((o,i)=>{
+    o.style.translate=`0 ${-t*R[i]}px`;
+  });
+
+  // 카드 그룹마다 이동값을 공유해 정렬 유지
+  groups.forEach(g=>{
+    const r=g.getBoundingClientRect();
+    if(r.bottom<-120||r.top>vh+120)return;
+
+    const center=r.top+r.height/2;
+    const d=Math.max(-5,Math.min(5,(center-vh/2)*.008));
+
+    g.querySelectorAll(".glass").forEach(e=>{
+      e.style.translate=`0 ${d}px`;
+    });
+  });
 }
+
+const q=()=>{
+  if(!tk){
+    tk=true;
+    requestAnimationFrame(par);
+  }
+};
+
+addEventListener("scroll",q,{passive:true});
+addEventListener("resize",q);
+par();
 </script>
 </body>
 </html>
