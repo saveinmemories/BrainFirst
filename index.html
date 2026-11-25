@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#0A0A0C;--ice:#FF4977;--t:#fff;--m:#DEDEDE;--gl:rgba(255,255,255,.03);--bd:rgba(255,255,255,.08);
+:root{color-scheme:dark;--bg:#FFFFFF;--ice:#FF4977;--t:#fff;--m:#DEDEDE;--gl:rgba(255,255,255,.03);--bd:rgba(255,255,255,.08);
 --f:"Pretendard","Pretendard Variable","Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;--e:var(--f);--r:16px;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
@@ -27,7 +27,7 @@ nav{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:10;mar
 nav .glass{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 24px;background:rgba(10,10,12,.7)}
 .lg{font-weight:500;letter-spacing:-.03em;white-space:nowrap}.lg small{font-weight:400;color:var(--m);font-size:12px;letter-spacing:0}
 .links{display:none;gap:28px;color:var(--m);font-size:14px}.links a{color:inherit;text-decoration:none;transition:.2s}.links a:hover{color:var(--t)}
-.pill{min-height:44px;padding:0 20px;border-radius:12px;background:var(--ice);color:#0A0A0C;font-weight:500;font-size:14px;box-shadow:0 0 24px rgba(255,73,119,.35);display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
+.pill{min-height:44px;padding:0 20px;border-radius:12px;background:var(--ice);color:#FFFFFF;font-weight:500;font-size:14px;box-shadow:0 0 24px rgba(255,73,119,.35);display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
 h1,h2,h3{margin:0;letter-spacing:-.03em;font-weight:500}
 h1{font-size:clamp(44px,11vw,104px);line-height:1.02;font-weight:500;letter-spacing:-.04em}
 h2{font-size:clamp(26px,5vw,40px);line-height:1.28}
@@ -51,17 +51,17 @@ section{padding:80px 0}
 .step .k{font-size:13px;color:var(--m)}.step h3{font-size:30px;font-weight:500;margin:10px 0 12px}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px!important;margin:4px 0 12px;width:100%;max-width:460px;border-radius:12px!important}
 .tabs button{min-height:48px;border-radius:10px;color:var(--m);font-weight:500;font-size:14px;transition:.2s}
-.tabs button.on{background:var(--t);color:#0A0A0C}
+.tabs button.on{background:var(--t);color:#FFFFFF}
 .item{width:100%;display:flex;gap:14px;align-items:center;text-align:left;min-height:56px;padding:10px 16px;margin-top:10px;border:1px solid var(--bd);border-radius:var(--r);background:var(--gl);transition:.2s}
 .item:hover{border-color:rgba(255,255,255,.25)}
 .item.on{border-color:var(--ice);background:rgba(255,73,119,.08)}
 .item .n{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-weight:500}
-.item.on .n{background:var(--ice);color:#0A0A0C;border-color:var(--ice)}
+.item.on .n{background:var(--ice);color:#FFFFFF;border-color:var(--ice)}
 .item small{display:block;color:var(--m);font-size:12px}
 textarea,input[type=text]{width:100%;margin-top:14px;padding:14px 16px;border-radius:var(--r);border:1px solid var(--bd);background:rgba(255,255,255,.03);resize:none}
 textarea::placeholder,input::placeholder{color:#C4C4C4}
 .btn{min-height:48px;padding:0 24px;border-radius:12px;font-weight:500;margin:14px 8px 0 0;transition:.2s}
-.btn.p{background:var(--ice);color:#0A0A0C}.btn.s{border:1px solid var(--bd);background:var(--gl)}
+.btn.p{background:var(--ice);color:#FFFFFF}.btn.s{border:1px solid var(--bd);background:var(--gl)}
 .btn:disabled{opacity:.3;cursor:not-allowed}.btn.p:not(:disabled):hover{box-shadow:0 0 24px rgba(255,73,119,.45)}
 .gauge{margin:20px 0 6px;padding:16px 20px;border-radius:var(--r);position:sticky;top:84px;z-index:4;background:rgba(10,10,12,.88);backdrop-filter:blur(16px);border:1px solid var(--bd);transition:.2s}
 .gauge.over{border-color:#fff;box-shadow:0 0 28px rgba(255,255,255,.3)}
@@ -96,7 +96,7 @@ textarea::placeholder,input::placeholder{color:#C4C4C4}
 .gbn{padding:24px}.gbn small{display:block;margin-top:10px;color:var(--m);font-size:12px}
 .gbn.new{border-color:var(--ice);animation:pp .4s ease}
 footer{padding:40px 0 64px;text-align:center;color:var(--m);font-size:13px}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#fff;color:#0A0A0C;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:500;z-index:30;opacity:0;pointer-events:none;transition:.25s}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#fff;color:#FFFFFF;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:500;z-index:30;opacity:0;pointer-events:none;transition:.25s}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media(min-width:760px){
  .links{display:flex}.badges{grid-template-columns:repeat(3,1fr)}
@@ -273,9 +273,9 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run(e.
 $$(".glass").forEach(g=>{if(g.querySelector(".cu,.bf,.ring"))io.observe(g)});
 
 /* avatars: original monochrome memoji-style illustrations (swap for your own images) */
-function av(k){const sk=["#E2E8F0","#CBD5E1","#B4C0CF","#D5DDE8"][k],hr="#1E293B",face=`<circle cx="50" cy="55" r="26" fill="${sk}"/>`,eyes=`<circle cx="41" cy="55" r="2.8" fill="#0A0A0C"/><circle cx="59" cy="55" r="2.8" fill="#0A0A0C"/><path d="M42 65Q50 72 58 65" stroke="#0A0A0C" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+function av(k){const sk=["#E2E8F0","#CBD5E1","#B4C0CF","#D5DDE8"][k],hr="#1E293B",face=`<circle cx="50" cy="55" r="26" fill="${sk}"/>`,eyes=`<circle cx="41" cy="55" r="2.8" fill="#FFFFFF"/><circle cx="59" cy="55" r="2.8" fill="#FFFFFF"/><path d="M42 65Q50 72 58 65" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
  const cap=`<path d="M24 52Q24 22 50 22Q76 22 76 52Q66 39 50 39Q34 39 24 52Z" fill="${hr}"/>`;
- const parts=[face+cap+eyes+`<g stroke="#0A0A0C" stroke-width="2" fill="none"><circle cx="41" cy="55" r="7.5"/><circle cx="59" cy="55" r="7.5"/><path d="M48.5 55h3"/></g>`,
+ const parts=[face+cap+eyes+`<g stroke="#FFFFFF" stroke-width="2" fill="none"><circle cx="41" cy="55" r="7.5"/><circle cx="59" cy="55" r="7.5"/><path d="M48.5 55h3"/></g>`,
  `<path d="M18 86Q10 22 50 20Q90 22 82 86Z" fill="${hr}"/>`+face+`<path d="M26 50Q50 24 74 50Q60 38 50 42Q38 38 26 50Z" fill="${hr}"/>`+eyes,
  `<g fill="${hr}"><circle cx="34" cy="31" r="11"/><circle cx="50" cy="26" r="12"/><circle cx="66" cy="31" r="11"/><circle cx="26" cy="44" r="8"/><circle cx="74" cy="44" r="8"/></g>`+face+eyes+`<circle cx="75" cy="62" r="3" fill="#FF4977"/>`,
  `<circle cx="50" cy="17" r="9" fill="${hr}"/>`+face+cap+eyes];
