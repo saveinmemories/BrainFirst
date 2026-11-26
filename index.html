@@ -237,10 +237,8 @@ b,strong{font-weight:500}
 </div>
 
 
-<h3 style="margin-top:56px;font-size:22px">나의 다짐 한 줄</h3>
-<p class="sub">앞으로 AI를 쓰기 전, 내가 지킬 나만의 기준을 남겨 주세요. 아래에 바로 추가돼요.</p>
-<div class="glass" style="margin-top:16px"><input type="text" id="gIn" maxlength="60" placeholder="예) 질문 전에 내 생각을 한 문장으로 먼저 적기" aria-label="AI 사용 전 다짐 한 줄">
-<button class="btn p" id="gBtn">다짐 남기기</button></div>
+<h3 style="margin-top:56px;font-size:22px">활동 사진</h3>
+<p class="sub">캠페인을 기획하고 부스를 운영하기까지의 기록들</p>
 <div class="gb" id="gb"></div>
 </section>
 <footer>Think-First · TEAM 뇌생각해조 </footer>
@@ -276,11 +274,6 @@ $("#bCmp").onclick=()=>{const m=Math.max(...sel),top=C[sel.indexOf(m)],tone=sel[
  $("#bOut").innerHTML=`<div class="split"><div class="glass me"><h3>나의 소비 성향</h3><p style="font-weight:500;margin:0 0 8px">${tone}</p><ul>${row(sel)}</ul></div><div class="glass aic"><h3>AI 균형 추천안</h3><ul>${row(AI)}</ul><p class="rs">고정 지출을 먼저 확보하고 저축과 여가를 같은 비중으로 두는 안이에요.</p></div></div>`;
  decide($("#bOut"),"내 소비 기준 그대로 실행해요.","AI 균형안을 참고해 예산을 조정했어요.");$("#bOut").scrollIntoView({behavior:"smooth",block:"nearest"})};
 dB();
-/* guestbook: first five are real pledges from the booth survey */
-const G=[["내 생각 문장 먼저 써 보고 AI 활용하기","부스 참여자"],["나만의 확고한 기준을 하나 세우고 시작하겠다.","부스 참여자"],["어느 정도 생각한 내용을 대략적으로 노트에 적어 보기","부스 참여자"],["내 의견을 제시한 뒤 비교해 보기","부스 참여자"],["물어보기 전에 잠시나마 나만의 온전한 생각을 할 수 있는 시간을 가져 보려고 한다.","부스 참여자"]];
-function dG(n){$("#gb").innerHTML=G.map((g,i)=>`<div class="glass gbn ${n&&!i?"new":""}"><p style="margin:0">“${esc(g[0])}”</p><small>${g[1]}</small></div>`).join("")}
-$("#gBtn").onclick=()=>{const i=$("#gIn"),v=i.value.trim();if(!v){toast("다짐 한 줄을 먼저 적어 주세요");i.focus();return}G.unshift([v,"방금 · 온라인 방문자"]);i.value="";dG(true);toast("다짐이 아카이브에 추가됐어요")};
-$("#gIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("#gBtn").click()});dG();
 /* reveal: count-up + bars, once */
 function run(el){
  el.querySelectorAll?.(".cu").forEach(e=>{const to=+e.dataset.to,d=+e.dataset.d||0,t0=performance.now();(function s(t){const p=Math.min((t-t0)/1300,1);e.textContent=(to*(1-Math.pow(1-p,3))).toFixed(d);if(p<1)requestAnimationFrame(s)})(t0)});
